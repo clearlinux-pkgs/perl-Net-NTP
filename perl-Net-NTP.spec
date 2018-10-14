@@ -4,15 +4,15 @@
 #
 Name     : perl-Net-NTP
 Version  : 1.5
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-ntp-perl/libnet-ntp-perl_1.5-1.debian.tar.xz
 Summary  : 'Perl extension for decoding NTP server responses'
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
-Requires: perl-Net-NTP-license
-Requires: perl-Net-NTP-man
+Requires: perl-Net-NTP-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 Net::NTP
@@ -20,6 +20,15 @@ Net::NTP
 This module will allow you to send a packet to an NTP server, get
 a response back, and then parse out the results according to RFC1305
 and RFC2030.
+
+%package dev
+Summary: dev components for the perl-Net-NTP package.
+Group: Development
+Provides: perl-Net-NTP-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Net-NTP package.
+
 
 %package license
 Summary: license components for the perl-Net-NTP package.
@@ -29,19 +38,11 @@ Group: Default
 license components for the perl-Net-NTP package.
 
 
-%package man
-Summary: man components for the perl-Net-NTP package.
-Group: Default
-
-%description man
-man components for the perl-Net-NTP package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Net-NTP-1.5
-mkdir -p %{_topdir}/BUILD/Net-NTP-1.5/deblicense/
+cd ..
+%setup -q -T -D -n Net-NTP-1.5 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Net-NTP-1.5/deblicense/
 
 %build
@@ -66,12 +67,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Net-NTP
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Net-NTP/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Net-NTP
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-NTP/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -80,12 +81,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Net/NTP.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Net/NTP.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-Net-NTP/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Net::NTP.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Net-NTP/deblicense_copyright

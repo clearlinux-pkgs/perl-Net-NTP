@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-NTP
 Version  : 1.5
-Release  : 5
+Release  : 6
 URL      : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-ntp-perl/libnet-ntp-perl_1.5-1.debian.tar.xz

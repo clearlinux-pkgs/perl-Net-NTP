@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-NTP
 Version  : 1.5
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-ntp-perl/libnet-ntp-perl_1.5-1.debian.tar.xz
@@ -80,7 +80,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Net-NTP
-cp %{_builddir}/Net-NTP-1.5/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Net-NTP/4305dcc1b68ae3beee4147db0b9510139ea3096f
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Net-NTP/4305dcc1b68ae3beee4147db0b9510139ea3096f
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Net/NTP.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Net/NTP.pm

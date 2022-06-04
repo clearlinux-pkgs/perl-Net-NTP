@@ -4,7 +4,7 @@
 #
 Name     : perl-Net-NTP
 Version  : 1.5
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AB/ABH/Net-NTP-1.5.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libn/libnet-ntp-perl/libnet-ntp-perl_1.5-1.debian.tar.xz
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Net/NTP.pm
+/usr/lib/perl5/*
